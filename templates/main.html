@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+<body>
+    <main>
+        <h1> Interactive Visualization
+        </h1>
+        <p>
+            Upload a text file of
+            <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">
+                SMILES strings
+            </a>
+            and this app will create a plot that visualizes:
+        <ul>
+            <li>
+                how easy it is to synthesize each compound in that file (y-axis). This synthetic accesibility
+                score is calculated according to work from
+                <a href="https://doi.org/10.1186/1758-2946-1-8"> Ertl and Schuffenhauer </a>
+            </li>
+            <li>
+                How <a href="https://en.wikipedia.org/wiki/Lipophilicity"> lipophilic </a> (clogP) each compound is
+                (x-axis). This is calculated according to work from
+                <a href="https://doi.org/10.1021/ci990307l"> Wildman and Crippen </a>
+            </li>
+            <li>
+                Display the molecular structure upon hoovering
+            </li>
+        </ul>
+        </p>
+        <p> The file must be:
+        <ul>
+            <li> .txt </li>
+            <li> each line in this file must contain exactly one valid SMILES string </li>
+            <li> smaller than 5 KB </li>
+        </ul>
+        </p>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="action_field" align="left"> {{ form.file() }} </div> </br>
+            <div class="action_field" align="left"> {{ form.submit() }} </div>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+            <li style="color:red;"> {{ message }} </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+    </main>
+</body>
+
+</html>
